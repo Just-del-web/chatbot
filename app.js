@@ -5,12 +5,11 @@ const http = require("http");
 const session = require("express-session");
 const { Server } = require("socket.io");
 const axios = require("axios");
-const PAYSTACK_SECRET_KEY = process.env.PAYSTACK_SECRET_KEY;
 const app = express();
 const server = http.createServer(app);
 const io = new Server(server);
 require("dotenv").config();
-console.log("Paystack Secret Key:", PAYSTACK_SECRET_KEY);
+
 
 const PORT = process.env.PORT ||  5000;
 
@@ -177,7 +176,10 @@ io.on("connection", (socket) => {
         const price = parseInt(item.split(", ₦")[1].trim());
         return sum + price;
       }, 0);
-  
+      
+      const PAYSTACK_SECRET_KEY = 'sk_test_e4ffabfa2972b7ffc69bafee7ea6f44add59dcf3';
+      console.log("Paystack Secret Key:", PAYSTACK_SECRET_KEY);
+    
       // Initialize Paystack payment
       try {
         const response = await axios.post(
@@ -195,11 +197,13 @@ io.on("connection", (socket) => {
           }
         );
 
+        console.log("Paystack Response:", response.data);
          // Send the payment link to the user
       const paymentLink = response.data.data.authorization_url;
       socket.emit(
         "bot-message",
-        `Click the link below to complete your payment:\n${response.data.authorization_url}`
+        `Click the button below to complete your payment:<br>
+        <a href="${paymentLink}" target="_blank" style="display: inline-block; padding: 10px 20px; background-color: #28a745; color: white; text-decoration: none; border-radius: 5px;">Pay Now</a>`
       );
     } catch (error) {
         console.error("Paystack error:", error.response?.data || error.message);
