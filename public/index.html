@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Restaurant-Chatbot</title>
+    <link rel="shortcut icon" href="/favicon/menu.png" type="image/x-icon">
+    <link rel="stylesheet" href="/css/index-styling.css" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css" />
+    
+  </head>
+  <body>
+    <h1>
+      Juts Chatbot
+    </h1>
+      <div id="chat-area">
+        <div id="chat-form"></div>
+        <div id="input-area">
+          <input
+            type="text"
+            id="input"
+            autocomplete="on" placeholder="Type your message here..."
+          />
+
+          <button id="btnBtn">
+            Send <i class='fa fa-paper-plane'></i></button>
+          
+        </div>
+      </div>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="/js/index.js"></script>
+  </body>
+</html>
