@@ -177,6 +177,8 @@ io.on("connection", (socket) => {
         return sum + price;
       }, 0);
       
+
+      //I had to put this cause it was not fetching from the env file
       const PAYSTACK_SECRET_KEY = 'sk_test_e4ffabfa2972b7ffc69bafee7ea6f44add59dcf3';
       console.log("Paystack Secret Key:", PAYSTACK_SECRET_KEY);
     
@@ -187,7 +189,7 @@ io.on("connection", (socket) => {
           {
             email: `${userName}@example.com`,
             amount: totalAmount * 100, // Convert to kobo
-            callback_url: `https://chilly-parents-sink.loca.lt`,
+            callback_url: `https://cbf8-197-211-63-80.ngrok-free.app`,
           },
           {
             headers: {
@@ -206,7 +208,6 @@ io.on("connection", (socket) => {
         <a href="${paymentLink}" target="_blank" style="display: inline-block; padding: 10px 20px; background-color: #28a745; color: white; text-decoration: none; border-radius: 5px;">Pay Now</a>`
       );
     } catch (error) {
-        console.error("Paystack error:", error.response?.data || error.message);
       socket.emit(
         "bot-message",
         "An error occurred while initializing the payment. Please try again later."
