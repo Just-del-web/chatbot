@@ -11,10 +11,10 @@ const io = new Server(server);
 require("dotenv").config();
 
 
-const PORT = process.env.PORT ||  5000;
+const PORT = process.env.PORT ||  10000;
 
 // Set the host to localhost if not specified in the environment
-const HOST = process.env.HOST|| "localhost";
+const HOST = process.env.HOST|| "0.0.0.0";
 
 
 const sessionMiddleware = session({
@@ -317,9 +317,9 @@ app.get("/paystack/callback", async (req, res) => {
 });
 
 // Setting up and starting the server
-server.listen(PORT, HOST, () => {
-  console.log(`Server is now running on http://${HOST}:${PORT}`);
-});
+app.listen(PORT, '0.0.0.0', () => {
+    console.log(`Server is now running on http://0.0.0.0:${PORT}`);
+  });
 
 
 
